@@ -21,10 +21,24 @@ config={        #fill according to your firebase database
 firebase = pyrebase.initialize_app(config)
 db = firebase.database()
 allCats = db.get()
-print("Value=",allCats.val()['auto']['lat'])
-print(allCats.val())
-for i in allCats.val():
-    for j in allCats.val()[i]:
+#print("Value=",allCats.val()['auto']['lat'])
+#print(allCats.val())
+tempLat1=0
+tempLat2=0
+tempLong1=0
+tempLong2=0
+for i in allCats.val()['user']:
+    for j in allCats.val()['user'][i]:
         print(i,j)
         #print(allCats.val()[i][j])
-        
+        tempLat1=allCats.val()['user'][i]['lat']
+        tempLong1=allCats.val()['user'][i]['long']
+        for k in allCats.val()['user']:
+            for l in allCats.val()['user'][k]:
+                tempLat2=allCats.val()['user'][i]['lat']
+                tempLong2=allCats.val()['user'][i]['long']
+                dist=distance(tempLat1,tempLon1,tempLat2,tempLon2)
+                if(dist<=1):
+                    continue
+                else:
+                    
